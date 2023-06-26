@@ -13,6 +13,7 @@ use App\Model\CreatorOffer;
 use App\Model\ReferralCodeUsage;
 use App\Model\Subscription;
 use App\Model\Transaction;
+use App\Model\Stripe_kyc;
 use App\Model\UserDevice;
 use App\Model\UserGender;
 use App\Model\UserVerify;
@@ -31,7 +32,12 @@ use Intervention\Image\Facades\Image;
 use JavaScript;
 use Jenssegers\Agent\Agent;
 use Ramsey\Uuid\Uuid;
-
+// use Mail;
+// use Illuminate\Support\Facades\Mail;
+// use Illuminate\Support\Facades\Mail;
+use SendGrid\Mail\Mail;
+use SendGrid\Mail\To;
+// use \Stripe;
 class SettingsController extends Controller
 {
     /**
@@ -50,6 +56,7 @@ class SettingsController extends Controller
         'notifications' => ['heading' => 'Your email notifications settings', 'icon' => 'notifications'],
         'privacy' => ['heading' => 'Your privacy and safety matters', 'icon' => 'shield'],
         'verify' => ['heading' => 'Get verified and start to earning now', 'icon' => 'checkmark'],
+        'KYC' => ['heading' => 'Submit For KYC', 'icon' => 'checkmark'],
     ];
 
     public function __construct()
@@ -177,7 +184,7 @@ class SettingsController extends Controller
                 }
                 break;
         }
-
+// die($request->route('type'));
         return $this->renderSettingView($request->route('type'), $data);
     }
 
@@ -659,4 +666,82 @@ class SettingsController extends Controller
         }
     }
 
+    public function geturl()  {
+      
+
+// require 'vendor/autoload.php';
+
+// Set your secret key. Remember to switch to your live secret key in production.
+// See your keys here: https://dashboard.stripe.com/apikeys
+$stripe = new \Stripe\StripeClient('sk_test_51MYiW4HAToWcG16uh57YcTW88D2LiCoQ4ruRBLSPSNwa0KCAKbK7hjQqMa7ghKJnEhVUxhLLCvNDZK6xwhn1M6T200NL8QKe91');
+
+// In the route handler for /create-verification-session:
+// Authenticate your user
+
+// Create the session
+$verification_session = $stripe->identity->verificationSessions->create([
+  'type' => 'document',
+  'metadata' => [
+    'user_id' => Auth::id(),
+  ],
+]);
+// echo $verification_session ;
+// Return only the client secret to the frontend.
+setcookie('session_id',$verification_session->id);
+
+$client_secret = $verification_session->client_secret;
+
+echo json_encode($verification_session);
+die;
+    }
+   
+
+  public  function insert_details() {
+    $id = Auth::id();
+    $cookies = $_COOKIE['session_id'];
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+    CURLOPT_URL => 'https://api.stripe.com/v1/identity/verification_sessions/'.$cookies.'',
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => '',
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 0,
+    CURLOPT_FOLLOWLOCATION => true,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => 'POST',
+    CURLOPT_HTTPHEADER => array(
+        'Authorization: Bearer sk_test_51MYiW4HAToWcG16uh57YcTW88D2LiCoQ4ruRBLSPSNwa0KCAKbK7hjQqMa7ghKJnEhVUxhLLCvNDZK6xwhn1M6T200NL8QKe91'
+    ),
+    ));
+    $response = curl_exec($curl);
+
+    curl_close($curl);
+    $data =  json_decode($response);
+
+
+    $data1['user_id'] = $id;
+    $data1['varification_status'] = $data->status;
+    Stripe_kyc::create($data1);
+    $user = Auth::user();
+    EmailsServiceProvider::sendGenericEmail(
+        [
+            'email' => $user->email,
+            'subject' => __('Action required | New identity check'),
+            'title' => __('Hello, :name,', ['name' => $user->name]),
+            'content' => __('Your Stripe Kyc sataus is :'.$data->status.'', ['siteName' => getSetting('site.name')]),
+            'button' => [
+                'text' => __('Go to admin'),
+                'url' => route('voyager.dashboard'),
+            ],
+        ]
+    );
+    }
+
+
+
+
 }
+
+
+
+

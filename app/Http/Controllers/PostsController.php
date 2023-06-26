@@ -12,6 +12,7 @@ use App\Model\Post;
 use App\Model\PostComment;
 use App\Model\Reaction;
 use App\Model\UserBookmark;
+use App\Model\Stripe_kyc;
 use App\Providers\AttachmentServiceProvider;
 use App\Providers\EmailsServiceProvider;
 use App\Providers\GenericHelperServiceProvider;
@@ -26,7 +27,7 @@ use Illuminate\Support\Facades\Auth;
 use JavaScript;
 use Log;
 use View;
-
+use Illuminate\Support\Facades\URL;
 class PostsController extends Controller
 {
     /**
@@ -100,6 +101,11 @@ class PostsController extends Controller
      */
     public function create()
     {
+        $baseUrl = URL::to('/');
+        $user_id = Auth::user();
+        $users =  Stripe_kyc::where('user_id',$user_id->id)->orderBy('id', 'desc')->first();
+        // $users = Stripe_kyc::latest()->find($user_id->id);
+      
         $canPost = true;
         if(getSetting('site.enforce_user_identity_checks')){
             if(!GenericHelperServiceProvider::isUserVerified()){
@@ -116,8 +122,13 @@ class PostsController extends Controller
                 'max_post_description_size' => (int)getSetting('feed.min_post_description')
             ],
         ]);
-
-        return view('pages.create', []);
+      
+            if(isset($users->varification_status) && $users->varification_status=='verified'){
+                return view('pages.create', []);
+            }else{
+                return redirect($baseUrl.'/my/settings/KYC');
+            }
+       
     }
 
     /**
