@@ -28,6 +28,7 @@
         "pion/laravel-chunk-upload": "^1.4",
         "pusher/pusher-php-server": "^4.1",
         "ramsey/uuid": "^4.2.2",
+        "sendgrid/sendgrid": "^8.0",
         "silviolleite/laravelpwa": "^2.0",
         "spatie/schema-org": "^2.8",
         "stripe/stripe-php": "^7.77",
