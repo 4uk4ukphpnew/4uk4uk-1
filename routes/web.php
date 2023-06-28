@@ -66,8 +66,6 @@ Route::group(['middleware' => ['auth','verified','2fa']], function () {
         Route::post('/settings/verify/upload', ['uses' => 'SettingsController@verifyUpload', 'as'   => 'settings.verify.upload']);
         Route::post('/settings/verify/upload/delete', ['uses' => 'SettingsController@deleteVerifyAsset', 'as'   => 'settings.verify.delete']);
         Route::post('/settings/verify/save', ['uses' => 'SettingsController@saveVerifyRequest', 'as'   => 'settings.verify.save']);
-        Route::post('/settings/kyc/geturl', ['uses' => 'SettingsController@geturl', 'as'   => 'settings.verify.geturl']);
-        Route::post('/settings/kyc/insert_details', ['uses' => 'SettingsController@insert_details', 'as'   => 'settings.verify.insert_details']);
         Route::get('/settings/privacy/countries', ['uses' => 'SettingsController@getCountries', 'as'   => 'settings.verify.countries']);
 
         // Profile save
