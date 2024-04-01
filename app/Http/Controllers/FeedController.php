@@ -57,6 +57,14 @@ class FeedController extends Controller
         return view('pages.feed', [
             'posts' => $posts,
             'suggestions' => MembersHelperServiceProvider::getSuggestedMembers(),
+			'user' => (object)[
+                'username' => Auth::user()->username,
+                'user_id' => Auth::user()->id,
+                'lists' => [
+                    'blocked'=>Auth::user()->lists->firstWhere('type', 'blocked')->id,
+                    'following'=>Auth::user()->lists->firstWhere('type', 'following')->id,
+                ],
+            ],
         ]);
     }
 

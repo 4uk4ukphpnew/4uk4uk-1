@@ -145,6 +145,11 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
         return $this->hasMany('App\Model\Subscription', 'sender_user_id')->where('status', 'canceled')->where('expire_at', '<', Carbon::now());
     }
 
+    public function marketplace_ads()
+    {
+        return $this->hasMany('App\Model\UserMarketplaceAd');
+    }
+
     public function subscribers()
     {
         return $this->hasMany('App\Model\Subscription', 'recipient_user_id');

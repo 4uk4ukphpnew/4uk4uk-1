@@ -63,17 +63,22 @@
 
             <div class="">
                 <div class="profile-cover-bg">
-                    <img class="card-img-top centered-and-cropped" src="{{$user->cover}}">
+                    <a href="{{$user->cover}}" data-toggle="lightbox" >
+                      <img class="card-img-top centered-and-cropped" src="{{$user->cover}}">
+                    </a>
                 </div>
             </div>
 
-            <div class="container d-flex justify-content-between align-items-center">
-                <div class="z-index-3 avatar-holder">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="z-index-3 avatar-holder bg-image hover-overlay" data-mdb-ripple-init   data-mdb-ripple-color="light">
+                  <a href="{{$user->avatar}}" data-toggle="lightbox" >
                     <img src="{{$user->avatar}}" class="rounded-circle">
+                  </a>
+
                 </div>
                 <div>
                     @if(!Auth::check() || Auth::user()->id !== $user->id)
-                        <div class="d-flex flex-row">
+                        <div class="float-left d-flex flex-row">
                             @if(Auth::check())
                                 <div class="">
                                 <span class="p-pill ml-2 pointer-cursor to-tooltip"
@@ -103,31 +108,31 @@
                                       data-recipient-id="{{$user->id}}"
                                       @endif
                                 >
-                                 @include('elements.icon',['icon'=>'cash-outline'])
+                                 <span class="material-symbols-rounded">monetization_on</span>
                                 </span>
                                 </div>
                                 <div class="">
                                     @if($hasSub || $viewerHasChatAccess)
                                         <span class="p-pill ml-2 pointer-cursor" data-toggle="tooltip" data-placement="top" title="{{__('Send a message')}}" onclick="messenger.showNewMessageDialog()">
-                                            @include('elements.icon',['icon'=>'chatbubbles-outline'])
+                                            <span class="material-symbols-rounded">
+chat
+</span>
                                         </span>
                                     @else
                                         <span class="p-pill ml-2 pointer-cursor" data-toggle="tooltip" data-placement="top" title="{{__('DMs unavailable without subscription')}}">
-                                        @include('elements.icon',['icon'=>'chatbubbles-outline'])
+                                        <span class="material-symbols-rounded">
+chat
+</span>
                                     </span>
                                     @endif
                                 </div>
                                 <span class="p-pill ml-2 pointer-cursor" data-toggle="tooltip" data-placement="top" title="{{__('Add to your lists')}}" onclick="Lists.showListAddModal();">
-                                 @include('elements.icon',['icon'=>'list-outline'])
+                                 <span class="material-symbols-rounded">
+favorite
+</span>
                             </span>
                             @endif
-                            @if(getSetting('profiles.allow_profile_qr_code'))
-                                <div>
-                                    <span class="p-pill ml-2 pointer-cursor" data-toggle="tooltip" data-placement="top" title="{{__('Get profile QR code')}}" onclick="Profile.getProfileQRCode()">
-                                        @include('elements.icon',['icon'=>'qr-code-outline'])
-                                    </span>
-                                </div>
-                            @endif
+
                             <span class="p-pill ml-2 pointer-cursor" data-toggle="tooltip" data-placement="top" title="{{__('Copy profile link')}}" onclick="shareOrCopyLink()">
                                  @include('elements.icon',['icon'=>'share-social-outline'])
                             </span>
@@ -165,7 +170,7 @@
                         <span>{{$user->name}}</span>
                         @if($user->email_verified_at && $user->birthdate && ($user->verification && $user->verification->status == 'verified'))
                             <span data-toggle="tooltip" data-placement="top" title="{{__('Verified user')}}">
-                                @include('elements.icon',['icon'=>'checkmark-circle-outline','centered'=>true,'classes'=>'ml-1 text-primary'])
+                                &nbsp;&nbsp;<i class="fas fa-user-check fa-md" style="color: #65f7b9;"></i>
                             </span>
                         @endif
                         @if($hasActiveStream)

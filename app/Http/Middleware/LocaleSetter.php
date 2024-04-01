@@ -23,14 +23,21 @@ class LocaleSetter
      */
     public function handle($request, Closure $next)
     {
-        // If user doesn't have a locale, default to settings one, or config one
-        if (! Session::has('locale')) {
-            if (InstallerServiceProvider::checkIfInstalled()) {
-                Session::put('locale', getSetting('site.default_site_language'));
-            } else {
-                Session::put('locale', Config::get('app.locale'));
+        $geoip = geoip($request->ip ());
+
+        if ($geoip->iso_code == 'BG') {
+            Session::put('locale', 'bg');
+        } else {
+            // If user doesn't have a locale, default to settings one, or config one
+            if (! Session::has('locale')) {
+                if (InstallerServiceProvider::checkIfInstalled()) {
+                    Session::put('locale', getSetting('site.default_site_language'));
+                } else {
+                    Session::put('locale', Config::get('app.locale'));
+                }
             }
         }
+
 
         // If user has locale setting, use that one
         if (isset(Auth::user()->settings['locale'])) {
@@ -62,7 +69,7 @@ class LocaleSetter
 //        $carbonTranslations->setLocale('ro');
 
         // Prepping the translation files for frontend usage
-        $langPath = resource_path('lang/'.App::getLocale());
+        $langPath = resource_path('lang/'.($geoip->iso_code == 'BG' ? 'bg' : App::getLocale()));
         if(!file_exists($langPath.'.json')){
             $langPath = resource_path('lang/en');
         }

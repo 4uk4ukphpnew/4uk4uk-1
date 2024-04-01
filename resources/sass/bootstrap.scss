@@ -3,7 +3,6 @@
 * Laravel Big bang default theme with light - dark alternatives
 *
  */
-
 @import "../../node_modules/bootstrap/scss/functions";
 @import "./bootstrap/dark/functions";
 
@@ -59,5 +58,8 @@ $isRTL : false;
 
 // Preloading elements
 @import "../../node_modules/placeholder-loading/src/scss/placeholder-loading";
+
+@import '~mdb-ui-kit/css/mdb.min.css';
+//@import "@materialstyle/materialstyle/scss/materialstyle";
 
 @import "./generic";

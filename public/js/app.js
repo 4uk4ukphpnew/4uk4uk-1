@@ -334,7 +334,17 @@ function reloadTheme() {
  * @param subtitle
  */
 function launchToast(type, title, message, subtitle = '') {
-    $.toast({
+    new Noty({
+    	type: type,
+	theme: 'mint',
+    	layout: 'topRight',
+    	text: message,
+	timeout: 5000,
+	progressBar: true
+    })
+    .show();
+/*
+$.toast({
         type: '',
         title: title,
         subtitle: subtitle,
@@ -345,6 +355,7 @@ function launchToast(type, title, message, subtitle = '') {
         },
         delay: 5000,
     });
+*/
 }
 
 /**

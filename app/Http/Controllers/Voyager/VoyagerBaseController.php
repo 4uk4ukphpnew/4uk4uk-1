@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers\Voyager;
 
+use Exception;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use TCG\Voyager\Facades\Voyager;
+use TCG\Voyager\Database\Schema\SchemaManager;
+use TCG\Voyager\Events\BreadDataAdded;
+use TCG\Voyager\Events\BreadDataDeleted;
+use TCG\Voyager\Events\BreadDataRestored;
+use TCG\Voyager\Events\BreadDataUpdated;
+use TCG\Voyager\Events\BreadImagesDeleted;
 use TCG\Voyager\Http\Controllers\Traits\BreadRelationshipParser;
 use TCG\Voyager\Http\Controllers\VoyagerBaseController as BaseVoyagerBaseController;
 
@@ -28,6 +35,7 @@ class VoyagerBaseController extends BaseVoyagerBaseController
 
     public function index(Request $request)
     {
+
         // GET THE SLUG, ex. 'posts', 'pages', etc.
         $slug = $this->getSlug($request);
 
@@ -41,6 +49,7 @@ class VoyagerBaseController extends BaseVoyagerBaseController
 
         $search = (object) ['value' => $request->get('s'), 'key' => $request->get('key'), 'filter' => $request->get('filter')];
 
+        //dd($this);
         $searchNames = [];
         if ($dataType->server_side) {
             $searchNames = $dataType->browseRows->filter(function ($formfield) {
@@ -196,5 +205,180 @@ class VoyagerBaseController extends BaseVoyagerBaseController
             'showSoftDeleted',
             'showCheckboxColumn'
         ));
+    }
+
+    /**
+     * Delete all images related to a BREAD item.
+     *
+     * @param \Illuminate\Database\Eloquent\Model $data
+     * @param \Illuminate\Database\Eloquent\Model $rows
+     *
+     * @return void
+     */
+    public function deleteBreadImages($data, $rows, $single_image = null)
+    {
+        $imagesDeleted = false;
+
+        foreach ($rows as $row) {
+            if ($row->type == 'multiple_images') {
+                $images_to_remove = json_decode($data->getOriginal($row->field), true) ?? [];
+            } else {
+                $images_to_remove = [$data->getOriginal($row->field)];
+            }
+
+            foreach ((array)$images_to_remove as $image) {
+                // Remove only $single_image if we are removing from bread edit
+                if ($image != config('voyager.user.default_avatar') && (is_null($single_image) || $single_image == $image)) {
+                    $this->deleteFileIfExists($image);
+                    $imagesDeleted = true;
+
+                    if (isset($row->details->thumbnails)) {
+                        foreach ($row->details->thumbnails as $thumbnail) {
+                            $ext = explode('.', $image);
+                            $extension = '.'.$ext[count($ext) - 1];
+
+                            $path = str_replace($extension, '', $image);
+
+                            $thumb_name = $thumbnail->name;
+
+                            $this->deleteFileIfExists($path.'-'.$thumb_name.$extension);
+                        }
+                    }
+                }
+            }
+        }
+
+        if ($imagesDeleted) {
+            event(new BreadImagesDeleted($data, $rows));
+        }
+    }
+
+    //***************************************
+    //
+    //  Delete uploaded file
+    //
+    //****************************************
+
+    public function remove_media(Request $request)
+    {
+        try {
+            // GET THE SLUG, ex. 'posts', 'pages', etc.
+            $slug = $request->get('slug');
+
+            // GET file name
+            $filename = $request->get('filename');
+
+            // GET record id
+            $id = $request->get('id');
+
+            // GET field name
+            $field = $request->get('field');
+
+            // GET multi value
+            $multi = $request->get('multi');
+
+            $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
+
+            // Load model and find record
+            $model = app($dataType->model_name);
+            $data = $model::find([$id])->first();
+
+            // Check if field exists
+            if (!isset($data->{$field})) {
+                throw new Exception(__('voyager::generic.field_does_not_exist'), 400);
+            }
+
+            // Check permission
+            $this->authorize('edit', $data);
+
+            if (@json_decode($multi)) {
+                // Check if valid json
+                if (is_null(@json_decode($data->{$field}))) {
+                    throw new Exception(__('voyager::json.invalid'), 500);
+                }
+
+                // Decode field value
+                $fieldData = @json_decode($data->{$field}, true);
+                $key = null;
+
+                // Check if we're dealing with a nested array for the case of multiple files
+                if (is_array($fieldData[0] ?? false)) {
+                    foreach ($fieldData as $index=>$file) {
+                        // file type has a different structure than images
+                        if (!empty($file['original_name'])) {
+                            if ($file['original_name'] == $filename) {
+                                $key = $index;
+                                break;
+                            }
+                        } else {
+                            $file = array_flip($file);
+                            if (array_key_exists($filename, $file)) {
+                                $key = $index;
+                                break;
+                            }
+                        }
+                    }
+                } else {
+                    $key = array_search($filename, $fieldData);
+                }
+
+                // Check if file was found in array
+                if (is_null($key) || $key === false) {
+                    throw new Exception(__('voyager::media.file_does_not_exist'), 400);
+                }
+
+                $fileToRemove = $fieldData[$key]['download_link'] ?? $fieldData[$key];
+
+                // Remove file from array
+                unset($fieldData[$key]);
+
+                // Generate json and update field
+                $data->{$field} = empty($fieldData) ? null : json_encode(array_values($fieldData));
+            } else {
+                if ($filename == $data->{$field}) {
+                    $fileToRemove = $data->{$field};
+
+                    $data->{$field} = null;
+                } else {
+                    throw new Exception(__('voyager::media.file_does_not_exist'), 400);
+                }
+            }
+
+            $row = $dataType->rows->where('field', $field)->first();
+
+            // Remove file from filesystem
+            if (in_array($row->type, ['image', 'multiple_images'])) {
+                $this->deleteBreadImages($data, [$row], $fileToRemove);
+            } else {
+                $this->deleteFileIfExists($fileToRemove);
+            }
+
+            $data->save();
+
+            return response()->json([
+                'data' => [
+                    'status'  => 200,
+                    'message' => __('voyager::media.file_removed'),
+                ],
+            ]);
+        } catch (Exception $e) {
+            $code = 500;
+            $message = __('voyager::generic.internal_error');
+
+            if ($e->getCode()) {
+                $code = $e->getCode();
+            }
+
+            if ($e->getMessage()) {
+                $message = $e->getMessage();
+            }
+
+            return response()->json([
+                'data' => [
+                    'status'  => $code,
+                    'message' => $message,
+                ],
+            ], $code);
+        }
     }
 }

@@ -24,6 +24,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'jsVars'], function () {
     Route::post('/theme/generate', 'GenericController@generateCustomTheme')->name('admin.theme.generate');
     Route::post('/license/save', 'GenericController@saveLicense')->name('admin.license.save');
 
+    Route::get('/marketplace_ads', 'Voyager\VoyagerMarketplaceAdController@index')->name('voyager.marketplace_ads.index');
+    Route::get('/marketplace_categories', 'Voyager\VoyagerMarketplaceCategoryController@index')->name('voyager.marketplace_categories.index');
+    Route::get('/marketplace_filters', 'Voyager\VoyagerMarketplaceFilterController@index')->name('voyager.marketplace_filters.index');
+    Route::get('/marketplace_cities', 'Voyager\VoyagerMarketplaceCityController@index')->name('voyager.marketplace_cities.index');
+    Route::get('/marketplace_settings', 'Voyager\VoyagerMarketplaceSettingsController@index')->name('voyager.marketplace_settings.index');
+
 });
 
 // Home & contact page
@@ -76,6 +82,18 @@ Route::group(['middleware' => ['auth','verified','2fa']], function () {
          * (My) Notifications
          */
         Route::get('/notifications/{type?}', ['uses' => 'NotificationsController@index', 'as'   => 'notifications']);
+
+        /*
+         * ADS
+         */
+        Route::group(['prefix' => 'ads', 'as' => 'ads.'], function () {
+            Route::get('/', ['uses' => 'MarketplaceController@index', 'as' => 'get']);
+            Route::get('/create', ['uses' => 'MarketplaceController@create', 'as' => 'create']);
+            Route::get('/{id}/edit', ['uses' => 'MarketplaceController@edit', 'as' => 'edit']);
+            Route::post('/', ['uses' => 'MarketplaceController@store', 'as' => 'store']);
+            Route::put('/{id}/update', ['uses' => 'MarketplaceController@update', 'as' => 'update']);
+            Route::delete('/{id}/delete', ['uses' => 'MarketplaceController@delete', 'as' => 'delete']);
+        });
 
         /*
          * (My) Messenger
@@ -249,7 +267,12 @@ Route::post('/update/doUpdate', ['uses' => 'InstallerController@doUpgrade', 'as'
 Route::post('/suggestions/members', ['uses' => 'FeedController@filterSuggestedMembers', 'as'   => 'suggestions.filter']);
 
 // Public pages
-Route::get('/pages/{slug}', ['uses' => 'PublicPagesController@getPage', 'as'   => 'pages.get']);
+Route::get('/pages/{slug}', ['uses' => 'PublicPagesController@getPage', 'as' => 'pages.get']);
+
+Route::get('/marketplace', ['uses' => 'MarketplacePublicController@index', 'as'  => 'marketplace.index']);
+Route::get('/marketplace/escorts/{location}', ['uses' => 'MarketplacePublicController@indexByLocation', 'as'  => 'marketplace.indexByLocation']);
+Route::get('/marketplace/{id}', ['uses' => 'MarketplacePublicController@showAd', 'as'  => 'marketplace.show']);
+Route::post('/marketplace/search', ['uses' => 'MarketplacePublicController@search', 'as'  => 'marketplace.search']);
 
 Route::get('/search', ['uses' => 'SearchController@index', 'as' => 'search.get']);
 Route::get('/search/posts', ['uses' => 'SearchController@getSearchPosts', 'as' => 'search.posts']);

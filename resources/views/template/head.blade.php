@@ -58,14 +58,30 @@
         })();
     </script>
 @endif
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" /><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <script src="{{asset('libs/pusher-js/dist/web/pusher.min.js')}}"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+<link href="/js/noty/lib/themes/mint.css" rel="stylesheet">
+<link href="/js/noty/lib/noty.css" rel="stylesheet">
+<link href="//cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link href="/libs/lightbox/dist/ekko-lightbox.css" rel="stylesheet">
 
 {{-- Favicon --}}
 <link rel="shortcut icon" href="{{ getSetting('site.favicon') }}" type="image/x-icon">
 
 {{-- (Preloading) Fonts --}}
-<link href="https://fonts.googleapis.com/css?family=Roboto:400,300" rel="preload" as="style">
+<!-- <link href="https://fonts.googleapis.com/css?family=Roboto:400,300" rel="preload" as="style"> -->
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,500,600,700" rel="preload" as="style">
+<!-- Font Awesome -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+  rel="stylesheet"
+/>
 {{-- Global CSS Assets --}}
 {!!
     Minify::stylesheet(

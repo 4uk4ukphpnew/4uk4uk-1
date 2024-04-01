@@ -77,7 +77,8 @@
 
     @if(getSetting('security.recaptcha_enabled') && !Auth::check())
         <div class="form-group row d-flex justify-content-center captcha-field">
-            {!! NoCaptcha::display(['data-theme' => (Cookie::get('app_theme') == null ? (getSetting('site.default_user_theme')) : Cookie::get('app_theme') )]) !!}
+            {!! NoCaptcha::displayWidget(['data-theme' => (Cookie::get('app_theme') == null ? (getSetting('site.default_user_theme')) : Cookie::get('app_theme') )]) !!}
+            
             {{--        {!! NoCaptcha::displaySubmit('register-form', 'submit now!', ['data-theme' => (Cookie::get('app_theme') == null ? (getSetting('site.default_user_theme')) : Cookie::get('app_theme') )]) !!}--}}
             @error('g-recaptcha-response')
             <span class="text-danger" role="alert">

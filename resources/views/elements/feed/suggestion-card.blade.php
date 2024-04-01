@@ -9,7 +9,7 @@
         <div class="card-text w-100 h-100 d-flex">
 
             <div class="d-flex align-items-center justify-content-center px-3 z-index-3">
-                <img src="{{$profile->avatar}}" class="avatar rounded-circle"  />
+                <a href="{{route('profile',['username'=> $profile->username])}}"><img src="{{$profile->avatar}}" class="avatar rounded-circle"  /></a>
             </div>
 
             <div class="w-100 z-index-3 text-truncate">

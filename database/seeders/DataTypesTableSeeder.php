@@ -14,12 +14,12 @@ class DataTypesTableSeeder extends Seeder
      */
     public function run()
     {
-        
+
 
         \DB::table('data_types')->delete();
-        
+
         \DB::table('data_types')->insert(array (
-            0 => 
+            0 =>
             array (
                 'id' => 1,
                 'name' => 'users',
@@ -37,7 +37,7 @@ class DataTypesTableSeeder extends Seeder
                 'created_at' => '2021-08-07 18:52:09',
                 'updated_at' => '2023-06-22 19:28:30',
             ),
-            1 => 
+            1 =>
             array (
                 'id' => 2,
                 'name' => 'menus',
@@ -55,7 +55,7 @@ class DataTypesTableSeeder extends Seeder
                 'created_at' => '2021-08-07 18:52:09',
                 'updated_at' => '2021-08-07 18:52:09',
             ),
-            2 => 
+            2 =>
             array (
                 'id' => 3,
                 'name' => 'roles',
@@ -73,7 +73,7 @@ class DataTypesTableSeeder extends Seeder
                 'created_at' => '2021-08-07 18:52:09',
                 'updated_at' => '2021-10-23 20:48:27',
             ),
-            3 => 
+            3 =>
             array (
                 'id' => 4,
                 'name' => 'wallets',
@@ -91,7 +91,7 @@ class DataTypesTableSeeder extends Seeder
                 'created_at' => '2021-08-07 19:37:16',
                 'updated_at' => '2023-08-08 23:18:04',
             ),
-            4 => 
+            4 =>
             array (
                 'id' => 6,
                 'name' => 'attachments',
@@ -109,7 +109,7 @@ class DataTypesTableSeeder extends Seeder
                 'created_at' => '2021-08-07 20:16:55',
                 'updated_at' => '2021-10-23 20:41:33',
             ),
-            5 => 
+            5 =>
             array (
                 'id' => 9,
                 'name' => 'notifications',
@@ -127,7 +127,7 @@ class DataTypesTableSeeder extends Seeder
                 'created_at' => '2021-08-07 20:19:11',
                 'updated_at' => '2021-10-23 19:43:57',
             ),
-            6 => 
+            6 =>
             array (
                 'id' => 10,
                 'name' => 'post_comments',
@@ -145,7 +145,7 @@ class DataTypesTableSeeder extends Seeder
                 'created_at' => '2021-08-07 20:20:55',
                 'updated_at' => '2021-10-23 20:44:14',
             ),
-            7 => 
+            7 =>
             array (
                 'id' => 11,
                 'name' => 'posts',
@@ -163,7 +163,7 @@ class DataTypesTableSeeder extends Seeder
                 'created_at' => '2021-08-07 20:22:37',
                 'updated_at' => '2023-01-11 01:34:15',
             ),
-            8 => 
+            8 =>
             array (
                 'id' => 12,
                 'name' => 'reactions',
@@ -181,7 +181,7 @@ class DataTypesTableSeeder extends Seeder
                 'created_at' => '2021-08-07 20:24:58',
                 'updated_at' => '2021-10-23 20:44:52',
             ),
-            9 => 
+            9 =>
             array (
                 'id' => 13,
                 'name' => 'subscriptions',
@@ -199,7 +199,7 @@ class DataTypesTableSeeder extends Seeder
                 'created_at' => '2021-08-07 20:25:32',
                 'updated_at' => '2023-03-20 20:40:39',
             ),
-            10 => 
+            10 =>
             array (
                 'id' => 14,
                 'name' => 'transactions',
@@ -217,7 +217,7 @@ class DataTypesTableSeeder extends Seeder
                 'created_at' => '2021-08-07 20:26:33',
                 'updated_at' => '2023-03-28 08:53:12',
             ),
-            11 => 
+            11 =>
             array (
                 'id' => 15,
                 'name' => 'user_bookmarks',
@@ -235,7 +235,7 @@ class DataTypesTableSeeder extends Seeder
                 'created_at' => '2021-08-07 20:27:47',
                 'updated_at' => '2021-10-23 20:46:15',
             ),
-            12 => 
+            12 =>
             array (
                 'id' => 16,
                 'name' => 'user_lists',
@@ -253,7 +253,7 @@ class DataTypesTableSeeder extends Seeder
                 'created_at' => '2021-08-07 20:28:45',
                 'updated_at' => '2021-10-23 20:47:00',
             ),
-            13 => 
+            13 =>
             array (
                 'id' => 17,
                 'name' => 'user_list_members',
@@ -271,7 +271,7 @@ class DataTypesTableSeeder extends Seeder
                 'created_at' => '2021-08-07 20:29:07',
                 'updated_at' => '2021-10-23 20:46:30',
             ),
-            14 => 
+            14 =>
             array (
                 'id' => 18,
                 'name' => 'user_messages',
@@ -289,7 +289,7 @@ class DataTypesTableSeeder extends Seeder
                 'created_at' => '2021-08-07 20:42:32',
                 'updated_at' => '2021-10-23 20:47:06',
             ),
-            15 => 
+            15 =>
             array (
                 'id' => 19,
                 'name' => 'withdrawals',
@@ -307,7 +307,7 @@ class DataTypesTableSeeder extends Seeder
                 'created_at' => '2021-08-07 20:51:14',
                 'updated_at' => '2023-03-02 14:36:59',
             ),
-            16 => 
+            16 =>
             array (
                 'id' => 20,
                 'name' => 'countries',
@@ -325,7 +325,7 @@ class DataTypesTableSeeder extends Seeder
                 'created_at' => '2021-09-21 18:10:16',
                 'updated_at' => '2021-10-23 20:43:47',
             ),
-            17 => 
+            17 =>
             array (
                 'id' => 21,
                 'name' => 'taxes',
@@ -343,7 +343,7 @@ class DataTypesTableSeeder extends Seeder
                 'created_at' => '2021-09-21 18:11:55',
                 'updated_at' => '2022-02-01 00:03:22',
             ),
-            18 => 
+            18 =>
             array (
                 'id' => 27,
                 'name' => 'public_pages',
@@ -361,7 +361,7 @@ class DataTypesTableSeeder extends Seeder
                 'created_at' => '2021-09-29 19:43:27',
                 'updated_at' => '2022-11-24 18:38:36',
             ),
-            19 => 
+            19 =>
             array (
                 'id' => 28,
                 'name' => 'user_verifies',
@@ -379,7 +379,7 @@ class DataTypesTableSeeder extends Seeder
                 'created_at' => '2021-10-20 16:11:44',
                 'updated_at' => '2021-10-23 20:47:29',
             ),
-            20 => 
+            20 =>
             array (
                 'id' => 29,
                 'name' => 'user_reports',
@@ -397,7 +397,7 @@ class DataTypesTableSeeder extends Seeder
                 'created_at' => '2021-11-05 11:32:40',
                 'updated_at' => '2022-06-26 16:10:28',
             ),
-            21 => 
+            21 =>
             array (
                 'id' => 30,
                 'name' => 'contact_messages',
@@ -415,7 +415,7 @@ class DataTypesTableSeeder extends Seeder
                 'created_at' => '2021-11-19 18:11:33',
                 'updated_at' => '2022-06-24 14:53:36',
             ),
-            22 => 
+            22 =>
             array (
                 'id' => 32,
                 'name' => 'featured_users',
@@ -433,7 +433,7 @@ class DataTypesTableSeeder extends Seeder
                 'created_at' => '2022-02-01 15:00:10',
                 'updated_at' => '2022-06-26 16:08:35',
             ),
-            23 => 
+            23 =>
             array (
                 'id' => 33,
                 'name' => 'payment_requests',
@@ -451,7 +451,7 @@ class DataTypesTableSeeder extends Seeder
                 'created_at' => '2022-02-06 16:23:24',
                 'updated_at' => '2023-03-27 23:29:29',
             ),
-            24 => 
+            24 =>
             array (
                 'id' => 34,
                 'name' => 'invoices',
@@ -469,7 +469,7 @@ class DataTypesTableSeeder extends Seeder
                 'created_at' => '2022-08-04 19:06:47',
                 'updated_at' => '2023-03-17 16:29:29',
             ),
-            25 => 
+            25 =>
             array (
                 'id' => 37,
                 'name' => 'stream_messages',
@@ -487,7 +487,7 @@ class DataTypesTableSeeder extends Seeder
                 'created_at' => '2023-06-21 14:48:56',
                 'updated_at' => '2023-06-21 14:48:56',
             ),
-            26 => 
+            26 =>
             array (
                 'id' => 38,
                 'name' => 'streams',
@@ -505,7 +505,7 @@ class DataTypesTableSeeder extends Seeder
                 'created_at' => '2023-06-21 15:01:44',
                 'updated_at' => '2023-06-21 15:40:53',
             ),
-            27 => 
+            27 =>
             array (
                 'id' => 39,
                 'name' => 'referral_code_usages',
@@ -523,7 +523,7 @@ class DataTypesTableSeeder extends Seeder
                 'created_at' => '2023-06-21 16:26:01',
                 'updated_at' => '2023-06-21 16:27:13',
             ),
-            28 => 
+            28 =>
             array (
                 'id' => 40,
                 'name' => 'rewards',
@@ -541,8 +541,98 @@ class DataTypesTableSeeder extends Seeder
                 'created_at' => '2023-06-21 16:26:04',
                 'updated_at' => '2023-06-21 16:30:34',
             ),
+            29 =>
+            array (
+                'id' => 41,
+                'name' => 'user_marketplace_ads',
+                'slug' => 'marketplace_ads',
+                'display_name_singular' => 'Marketplace Ad',
+                'display_name_plural' => 'Marketplace Ads',
+                'icon' => 'voyager-star',
+                'model_name' => 'App\\Model\\UserMarketplaceAd',
+                'policy_name' => NULL,
+                'controller' => NULL,
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 1,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+                'created_at' => '2023-06-21 16:26:04',
+                'updated_at' => '2023-06-21 16:30:34',
+            ),
+            30 =>
+            array (
+                'id' => 42,
+                'name' => 'user_marketplace_ads_cities',
+                'slug' => 'marketplace_cities',
+                'display_name_singular' => 'Marketplace City',
+                'display_name_plural' => 'Marketplace Cities',
+                'icon' => 'voyager-location',
+                'model_name' => 'App\\Model\\UserMarketplaceAdCity',
+                'policy_name' => NULL,
+                'controller' => NULL,
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 1,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+                'created_at' => '2023-06-21 16:26:04',
+                'updated_at' => '2023-06-21 16:30:34',
+            ),
+            31 =>
+            array (
+                'id' => 43,
+                'name' => 'user_marketplace_ads_categories',
+                'slug' => 'marketplace_categories',
+                'display_name_singular' => 'Marketplace Category',
+                'display_name_plural' => 'Marketplace Categories',
+                'icon' => 'voyager-thumb-tack',
+                'model_name' => 'Rinvex\\Categories\\Models\\Category',
+                'policy_name' => NULL,
+                'controller' => NULL,
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 1,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+                'created_at' => '2023-06-21 16:26:04',
+                'updated_at' => '2023-06-21 16:30:34',
+            ),
+            32 =>
+            array (
+                'id' => 44,
+                'name' => 'user_marketplace_ads_filters',
+                'slug' => 'marketplace_filters',
+                'display_name_singular' => 'Marketplace Filter',
+                'display_name_plural' => 'Marketplace Filters',
+                'icon' => 'voyager-tag',
+                'model_name' => 'App\\Model\\UserMarketplaceAdFilter',
+                'policy_name' => NULL,
+                'controller' => NULL,
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 1,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+                'created_at' => '2023-06-21 16:26:04',
+                'updated_at' => '2023-06-21 16:30:34',
+            ),
+            33 =>
+            array (
+                'id' => 45,
+                'name' => 'user_marketplace_ads_settings',
+                'slug' => 'marketplace_settings',
+                'display_name_singular' => 'Marketplace Setting',
+                'display_name_plural' => 'Marketplace Settings',
+                'icon' => 'voyager-settings',
+                'model_name' => 'App\\Model\\UserMarketplaceAdSetting',
+                'policy_name' => NULL,
+                'controller' => NULL,
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 1,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+                'created_at' => '2023-06-21 16:26:04',
+                'updated_at' => '2023-06-21 16:30:34',
+            ),
         ));
-        
-        
+
+
     }
 }

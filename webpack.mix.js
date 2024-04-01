@@ -1,6 +1,7 @@
 const mix = require('laravel-mix');
 require('laravel-mix-purgecss');
 
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -11,6 +12,14 @@ require('laravel-mix-purgecss');
  | file for the application as well as bundling up all the JS files.
  |
  */
+
+/*
+mix.webpackConfig({
+    stats: {
+        children: true,
+    },
+});
+*/
 
 let outputPath = 'public/css/theme';
 if(typeof process.env.npm_config_outputPath !== 'undefined'){

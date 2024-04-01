@@ -202,3 +202,21 @@ function noMessagesLabel() {
 function noContactsLabel() {
     return `<div class="d-flex mt-3 mt-md-2 pl-3 pl-md-0 mb-3 pl-md-0"><span>${trans("Click the text bubble to send a new message.")}</span></div>`;
 }
+
+/**
+ * Load message media list
+ * @param attachmentsArray
+ * @returns {string}
+ */
+function loadMessageMedia(attachmentsArray) {
+    let mediaHtml = "";
+    for (let index = 0; index < attachmentsArray?.length; index++) {
+        const media = attachmentsArray[index];
+        mediaHtml += "<div class='col-md-3 col-6 py-2'>";
+        if(media.attachmentType === 'image') {
+            mediaHtml += "<img src='" + media.thumbnail + "' class='img-fluid' />";
+        }
+        mediaHtml += "</div>";                
+    }
+    return mediaHtml;
+}

@@ -57,6 +57,7 @@ var messenger = {
      * Boots up the main messenger functions
      */
     boot: function(){
+$(".content-wrapper").removeClass("min-vh-100");
         Pusher.logToConsole = typeof messengerVars.pusherDebug !== 'undefined' ? messengerVars.pusherDebug : false;
         let params = {
             authorizer: PusherBatchAuthorizer,
@@ -408,10 +409,13 @@ var messenger = {
      */
     reloadConversation: function () {
         let conversationHtml = '';
+        let mediaHtml = '';
         $.each( messenger.state.conversation, function( key, value ) {
+            mediaHtml += loadMessageMedia(value.attachments);
             conversationHtml += messageElement(value);
         });
         $('.conversation-content').html(conversationHtml);
+        $('.message-media-list').html(mediaHtml);
 
         // Navigating to last message or last paid mesage
         let urlParams = new URLSearchParams(window.location.search);

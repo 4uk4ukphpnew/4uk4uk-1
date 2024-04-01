@@ -100,4 +100,7 @@ $ph-bg:                   lighten($gray-900-alt,8%) !default;
 $ph-color:                darken($gray-800-alt,8%) !default;
 @import "../../node_modules/placeholder-loading/src/scss/placeholder-loading";
 
+@import '~mdb-ui-kit/css/mdb.min.css';
+//@import "@materialstyle/materialstyle/scss/materialstyle";
+
 @import "./generic";

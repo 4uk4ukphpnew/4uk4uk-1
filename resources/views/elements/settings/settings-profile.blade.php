@@ -166,5 +166,5 @@
             </span>
         @endif
     </div>
-    <button class="btn btn-primary btn-block rounded mr-0" type="submit">{{__('Save')}}</button>
+    <button class="btn btn-block rounded mr-0" style="background: #65f7b9; color: #000;" type="submit" >{{__('Save')}}</button>
 </form>

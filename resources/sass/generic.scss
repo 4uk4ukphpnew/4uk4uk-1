@@ -74,8 +74,25 @@ footer{
 }
 
 // Layout
+.background-blurred {
+   position: absolute;
+    filter: blur(1.5px) !important;
+    opacity: 0.8;
+}
 
-.mobile-bottom-nav{
+.enable-background-blur>* {
+  ;
+  opacity: 0.8;
+}
+
+.disable-background-blur {
+  filter: blur(0);
+  opacity: 1.0;
+}
+
+.mobile-bottom-nav {
+
+
     height: 70px;
     display: flex;
     justify-content: space-evenly;
@@ -84,7 +101,10 @@ footer{
     bottom: 0;
     width: 100%;
 }
-
+.mobile-bottom-nav ~ * {
+        backdrop-filter: blur(8px);
+        opacity: 0.8;
+    }
 .neutral-bg{
     @if $color-scheme-alt == dark {
         background-color:$gray-100!important;
@@ -1015,4 +1035,3 @@ a.text-dark:hover,  a.text-light:hover,  a.text-white:hover,  a.text-black:hover
         margin-right: -60px!important;
     }
 }
-

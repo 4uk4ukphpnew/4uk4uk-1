@@ -212,7 +212,11 @@ return [
         App\Providers\ListsHelperServiceProvider::class,
         App\Providers\IconsServiceProvider::class,
         App\Providers\EmailsServiceProvider::class,
-        App\Providers\WasabiServiceProvider::class
+        App\Providers\WasabiServiceProvider::class,
+        App\Providers\MarketplaceServiceProvider::class,
+
+        \Torann\GeoIP\GeoIPServiceProvider::class,
+        CrixuAMG\Mentions\Providers\MentionServiceProvider::class,
     ],
 
     /*
@@ -276,7 +280,7 @@ return [
         'GenericHelper' => App\Providers\GenericHelperServiceProvider::class,
         'LocalesHelper' => App\Providers\LocalesServiceProvider::class,
         'StreamsHelper' => App\Providers\StreamsServiceProvider::class,
-
+        'GeoIP' => \Torann\GeoIP\Facades\GeoIP::class,
     ],
 
 ];

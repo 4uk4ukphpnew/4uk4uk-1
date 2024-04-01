@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Model\{UserMarketplaceAd, UserMarketplaceAdCity};
 
 class Country extends Model
 {
@@ -24,6 +25,8 @@ class Country extends Model
         'pivot', 'created_at', 'updated_at',
     ];
 
+    protected $with = ['cities'];
+
     /**
      * The attributes that should be cast to native types.
      *
@@ -35,5 +38,13 @@ class Country extends Model
     public function taxes()
     {
         return $this->belongsToMany('App\Model\Tax', 'country_taxes')->select(['id', 'name', 'percentage', 'type']);
+    }
+
+    public function user_marketplace_ads () {
+      return $this->hasMany (UserMarketplaceAd::class);
+    }
+
+    public function cities () {
+      return $this->hasMany (UserMarketplaceAdCity::class);
     }
 }

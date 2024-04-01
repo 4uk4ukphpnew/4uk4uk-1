@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use const PHP_SAPI;
+
 use App\Model\Country;
 use App\Providers\GenericHelperServiceProvider;
 use App\Providers\ListsHelperServiceProvider;
@@ -28,7 +30,7 @@ class ProfileController extends Controller
     {
         $username = $request->route('username');
         $this->user = PostsHelperServiceProvider::getUserByUsername($username);
-        if (! $this->user) {
+        if (! $this->user && PHP_SAPI !== 'cli') {
             abort(404);
         }
     }

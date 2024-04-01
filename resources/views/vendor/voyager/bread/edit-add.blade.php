@@ -120,6 +120,7 @@
                         <input name="image" id="upload_file" type="file"
                                  onchange="$('#my_form').submit();this.value='';">
                         <input type="hidden" name="type_slug" id="type_slug" value="{{ $dataType->slug }}">
+                        <input type="hidden" name="type_realid" id="type_realid" value="{{ $dataType->id }}">
                         {{ csrf_field() }}
                     </form>
 
@@ -165,6 +166,7 @@
                 slug:   '{{ $dataType->slug }}',
                 filename:  $file.data('file-name'),
                 id:     $file.data('id'),
+                realid: $file.data('realid'),
                 field:  $file.parent().data('field-name'),
                 multi: isMulti,
                 _token: '{{ csrf_token() }}'

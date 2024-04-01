@@ -1,5 +1,5 @@
 body {
-    font-family: 'Open Sans', sans-serif;
+    font-family:  'Helvetica', 'Arial', sans-serif;
     min-height: 100%!important;
 }
 /* Top Navbar Menu */
@@ -578,4 +578,51 @@ footer .ion-icon-wrapper{
     .page-item.disabled {
         display: block;
     }
+}
+
+
+/* overwrite Swiper */
+.swiper-pagination-bullet {
+    background: #cb0c9f !important;
+}
+
+.mobile-bottom-bar .ion-icon-inner svg{
+    display: block;
+    height: 95%;
+    width: 95%;
+    color: #fff;
+}
+.mobile-bottom-bar img.rounded-circle.user-avatar.w-32{
+    width: 30px;
+    height: 30px;
+}
+.mobile-bottom-bar i.fas.fa-camera{
+    font-size: 30px !important;
+    color: #fff;
+}
+.mobile-bottom-nav{
+    height: 60px;
+}
+.mobile-bottom-nav:before{
+    content: "";
+    position: absolute;
+    width : 100%;
+    height: 100%;
+    background: inherit;
+    z-index: -1;
+    background-color: rgba(0, 0, 0, 0.5) !important;"
+    backdrop-filter: blur(2px);
+    backdrop-filter: brightness(60%);
+    backdrop-filter: contrast(40%);
+    backdrop-filter: drop-shadow(4px 4px 10px blue);
+    backdrop-filter: grayscale(30%);
+    backdrop-filter: hue-rotate(120deg);
+    backdrop-filter: invert(70%);
+    backdrop-filter: opacity(20%);
+    backdrop-filter: sepia(90%);
+    backdrop-filter: saturate(80%);
+    filter        : blur(10px);
+    -moz-filter   : blur(10px);
+    -webkit-filter: blur(10px);
+    -o-filter     : blur(10px);
 }

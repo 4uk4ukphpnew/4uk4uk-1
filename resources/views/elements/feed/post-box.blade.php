@@ -2,7 +2,7 @@
     <div class="post-header pl-3 pr-3 ">
         <div class="d-flex">
             <div class="avatar-wrapper">
-                <img class="avatar rounded-circle" src="{{$post->user->avatar}}">
+                <a href="{{route('profile',['username'=> $post->user->username])}}"><img class="avatar rounded-circle" src="{{$post->user->avatar}}"></a>
             </div>
             <div class="post-details pl-2 w-100{{$post->is_pinned ? '' : '' }}">
                 <div class="d-flex justify-content-between">

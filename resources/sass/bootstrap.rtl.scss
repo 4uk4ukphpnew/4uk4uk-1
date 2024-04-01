@@ -61,6 +61,9 @@ $ph-bg:                   #fff !default;
 $ph-color:                #ced4da !default;
 @import "../../node_modules/placeholder-loading/src/scss/placeholder-loading";
 
+@import '~mdb-ui-kit/css/mdb.min.css';
+//@import "@materialstyle/materialstyle/scss/materialstyle";
+
 @import "./generic";
 
 .list-item .user-avatar:last-child{

@@ -1,14 +1,21 @@
 .conversations-wrapper{
-    height:100vh;
+    /* height:100vh; */
+    height:calc(100vh - 68px);
     overflow-x: hidden;
     overflow-y: auto!important;
 }
 
 .conversation-wrapper{
-    height:75vh;
+    /* height:100vh; */
+    height:calc(100vh - 68px);
 }
 
-.conversation-header{}
+.conversation-header{
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background-color: #222222;
+}
 
 .conversation-header .details-holder, .new-conversation-header .details-holder{
     padding: 30px 15px 15px;
@@ -244,4 +251,35 @@
 .selectize-input {
     max-height: 100px;
     overflow-y: auto;
+}
+
+.option-buttons-wrapper{
+    width: 100%;
+    display: block;
+    padding: 0px 60px 10px 60px;
+}
+.option-buttons-wrapper .btn-option{
+    display: inline-block;
+    background-color: #3b3b3b;
+    border-radius: 5px;
+    border: none;
+    font-size: 13px;
+    color: white;
+    padding: 5px 12px 5px 8px;
+    margin: 0 3px;
+    cursor: pointer;
+}
+.option-buttons-wrapper .btn-option:nth-child(2){ background-color: #3b3b3b;}
+.option-buttons-wrapper .btn-option.save{ background-color: #cb96fe;}
+.option-buttons-wrapper .btn-option svg{ width: 12px; margin-bottom: 3px; margin-right: 3px;}
+
+@media only screen and (max-width: 500px) {   
+    .option-buttons-wrapper{        
+        padding: 0px 20px 10px 20px;
+    }
+    .option-buttons-wrapper .btn-option{
+        margin: 0px;
+        font-size: 12px;
+    }
+    .option-buttons-wrapper .btn-option svg{width: 10px; margin-bottom: 1px;}
 }

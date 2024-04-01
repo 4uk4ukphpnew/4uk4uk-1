@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="h-100" dir="{{GenericHelper::getSiteDirection()}}" lang="{{session('locale')}}">
+<html class="h-100" dir="{{GenericHelper::getSiteDirection()}}" lang="{{session('locale')}}" >
 <head>
     <meta charset="utf-8">
     {{-- Page title --}}

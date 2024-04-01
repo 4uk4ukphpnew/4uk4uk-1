@@ -114,6 +114,31 @@
                     </div>
                 </a>
             </li>
+
+            <li class="nav-item">
+                <a href="#collapsed-menu-ads" class="nav-link {{Route::currentRouteName() == 'my.ads.get' && (request()->route("username") == Auth::user()->username) ? 'active' : ''}} h-pill h-pill-primary d-flex justify-content-between"
+                    data-mdb-collapse-init
+                    data-mdb-ripple-init
+                    role="button"
+                    aria-expanded="true"
+                    aria-controls="collapsed-menu-ads">
+
+                    <div class="d-flex justify-content-center align-items-center">
+                        <div class="icon-wrapper d-flex justify-content-center align-items-center">
+                            <span class="material-symbols-rounded">ads_click</span>
+                        </div>
+                        <span class="d-none d-md-block d-xl-block d-lg-block ml-2 text-truncate side-menu-label">{{__('My ads')}}</span>
+                    </div>
+                </a>
+                <div class="collapse show navbar-collapse container" id="collapsed-menu-ads">
+                    <div class="list-group list-group-light" style="margin-left: 15%;">
+                        <a href="{{route('my.ads.get',['username'=>Auth::user()->username])}}" class="list-group-item list-group-item-action px-3 border-0 {{Route::currentRouteName() == 'my.ads.get' && (request()->route("username") == Auth::user()->username) ? 'active' : ''}}" aria-current="{{Route::currentRouteName() == 'my.ads.get' && (request()->route("username") == Auth::user()->username) ? 'true' : 'false'}}" data-mdb-ripple-init>{{__('Show All Ads')}}</a>
+                        <a href="{{route('my.ads.create',['username'=>Auth::user()->username])}}" class="list-group-item list-group-item-action px-3 border-0 {{Route::currentRouteName() == 'my.ads.create' && (request()->route("username") == Auth::user()->username) ? 'active' : ''}}" aria-current="{{Route::currentRouteName() == 'my.ads.create' && (request()->route("username") == Auth::user()->username) ? 'true' : 'false'}}" data-mdb-ripple-init>{{__('Create New Ad')}}</a>
+                        <a href="{{route('marketplace.index',['username'=>Auth::user()->username])}}" class="list-group-item list-group-item-action px-3 border-0 {{Route::currentRouteName() == 'marketplace.index' && (request()->route("username") == Auth::user()->username) ? 'active' : ''}}" aria-current="{{Route::currentRouteName() == 'marketplace.index' && (request()->route("username") == Auth::user()->username) ? 'true' : 'false'}}" data-mdb-ripple-init>{{__('Visit Marketplace')}}</a>
+                    </div>
+                </div>
+            </li>
+
         @endif
 
         @if(!Auth::check())

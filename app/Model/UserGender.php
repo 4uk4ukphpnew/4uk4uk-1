@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Model\UserMarketplaceAd;
 
 class UserGender extends Model
 {
@@ -24,4 +25,7 @@ class UserGender extends Model
 
     ];
 
+    public function user_marketplace_ads () {
+      return $this->belongsToMany (UserMarketplaceAd::class);
+    }
 }

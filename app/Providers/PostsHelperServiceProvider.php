@@ -301,7 +301,19 @@ class PostsHelperServiceProvider extends ServiceProvider
                     $post->setAttribute('isSubbed', true);
                 }
                 $post->setAttribute('postPage',$data['currentPage']);
-                $post = ['id' => $post->id, 'html' => View::make('elements.feed.post-box')->with('post', $post)->render()];
+                $user =  (object) [
+                      'username' => Auth::user()->username,
+                      'user_id' => Auth::user()->id,
+                      'lists' => [
+                          'blocked'=>Auth::user()->lists->firstWhere('type', 'blocked')->id,
+                          'following'=>Auth::user()->lists->firstWhere('type', 'following')->id,
+                      ],
+                  ];
+                $post = [
+                  'id' => $post->id,
+                  'html' => View::make('elements.feed.post-box')->with('post', $post)->with('user', $user)->render(),
+
+                ];
 
                 return $post;
             });

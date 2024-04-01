@@ -22,10 +22,42 @@
 
 {{-- Page specific JS --}}
 @yield('scripts')
-
+@yield('captcha')
 <script type="module" src="{{asset('/libs/ionicons/dist/ionicons/ionicons.esm.js')}}"></script>
 <script nomodule src="{{asset('/libs/ionicons/dist/ionicons/ionicons.js')}}"></script>
+<script src="/js/noty/lib/noty.js" type="text/javascript"></script>
+<script src="/libs/mdb-ui-kit/js/mdb.umd.min.js" type="text/javascript"></script>
+<script src="//cdn.ckeditor.com/ckeditor5/41.2.1/classic/ckeditor.js" type="text/javascript"></script>
+<script src="//cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="/libs/lightbox/dist/ekko-lightbox.js" type="text/javascript"></script>
 
+<script>
+    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+        event.preventDefault();
+        $(this).ekkoLightbox();
+    });
+
+    $(function () {
+        $('.select2-form-js-field').select2({
+            width: 'resolve'
+        });
+
+        ClassicEditor
+            .create (document.querySelector('.ckeditor-input-title'))
+            .catch (error => {
+                console.error (error);
+            });
+        ClassicEditor
+            .create (document.querySelector('.ckeditor-input-description'))
+            .catch (error => {
+                console.error (error);
+            });
+
+
+        //const element = document.querySelector('.accordion-button');
+        //const instance = new Collapse(element);
+    });
+</script>
 @if(getSetting('custom-code-ads.custom_js'))
     {!! getSetting('custom-code-ads.custom_js') !!}
 @endif

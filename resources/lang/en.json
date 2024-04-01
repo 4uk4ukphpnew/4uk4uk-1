@@ -944,6 +944,11 @@
     "Pin removed." :"Un-pin post",
     "Pinned post": "Pinned post",
     "Notes" : "Notes",
-    "Payment notes are required" : "Payment notes are required"
-
+    "Payment notes are required" : "Payment notes are required",
+    "My ads": "My ads",
+    "Create New Ad": "Create New Ad",
+    "Edit Ad": "Edit Existing Ad",
+    "Show All Ads": "Show all",
+    "Show Ad": "Show Ad",
+    "Visit Marketplace": "To Marketplace"
 }

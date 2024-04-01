@@ -3,13 +3,12 @@
 * Laravel Big bang default theme with light - dark alternatives
 *
  */
-
 @import "../../node_modules/bootstrap/scss/functions";
 @import "./bootstrap/dark/functions";
 
 @import "./variables";  // Base theme variables
 @import "../../node_modules/bootstrap/scss/variables";
-//@import "./variables";  // Base theme variables
+@import "./variables";  // Base theme variables
 @import "./variables-dark";  // Dark theme colors override | only the dark colors mapped as `-alt`
 $color-scheme-alt: light;
 $isRTL : false;
@@ -94,10 +93,12 @@ $isRTL : false;
     @import "./bootstrap/dark/dark";
 
 @import "./bootstrap/dark/utilities/display-dark";
-
 // Preloading Elements
 $ph-bg:                   lighten($gray-900-alt,8%) !default;
 $ph-color:                darken($gray-800-alt,8%) !default;
 @import "../../node_modules/placeholder-loading/src/scss/placeholder-loading";
+
+@import '~mdb-ui-kit/css/mdb.min.css';
+//@import "@materialstyle/materialstyle/scss/materialstyle";
 
 @import "./generic";
