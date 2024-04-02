@@ -38,14 +38,16 @@ class UserMarketplaceAd extends Model implements HasMedia
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function vzt()
-    {
-        return visits($this);
+    public function getVisitsAttribute () {
+        return $this->visits ()->count ();
     }
 
-    public function visits()
-    {
-        return visits($this)->relation();
+    public function visits () {
+       return visits ($this);
+    }
+
+    public function visitors () {
+        return visits ($this)->relation ();
     }
 
     public function gender () {

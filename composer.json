@@ -31,6 +31,7 @@
 		"rinvex/laravel-categories": "v6.0.0",
 		"rtconner/laravel-likeable": "3.2.0",
 		"silviolleite/laravelpwa": "2.0.3",
+		"spatie/laravel-collection-macros": "*",
 		"spatie/laravel-medialibrary": "7.20.0",
 		"spatie/laravel-searchable": "1.12.0",
 		"spatie/laravel-sitemap": "*",
@@ -44,15 +45,17 @@
 		"zanysoft/laravel-zip": "1.0.5"
 	},
     "require-dev": {
-        "barryvdh/laravel-debugbar": "v3.7.0",
-        "facade/ignition": "2.17.7",
-        "fakerphp/faker": "v1.20.0",
-        "friendsofphp/php-cs-fixer": "v3.4.0",
-        "mockery/mockery": "1.6.10",
-        "nunomaduro/collision": "v5.11.0",
-        "orangehill/iseed": "v3.0.3",
-        "phpunit/phpunit": "9.6.17"
-    },
+		"barryvdh/laravel-debugbar": "v3.7.0",
+		"facade/ignition": "2.17.7",
+		"fakerphp/faker": "v1.20.0",
+		"friendsofphp/php-cs-fixer": "v3.4.0",
+		"kitloong/laravel-migrations-generator": "*",
+		"mockery/mockery": "1.6.10",
+		"nunomaduro/collision": "v5.11.0",
+		"orangehill/iseed": "v3.0.3",
+		"pepijnolivier/eloquent-model-generator": "*",
+		"phpunit/phpunit": "9.6.17"
+	},
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
