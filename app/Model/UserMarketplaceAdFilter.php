@@ -2,7 +2,7 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Model\UserMarketplaceAd;
+use App\Model\UserMarketplaceAdCategory;
 
 class UserMarketplaceAdFilter extends Model {
     protected $table = 'user_marketplace_ads_filters';
@@ -13,5 +13,9 @@ class UserMarketplaceAdFilter extends Model {
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = ['name', 'category_id', 'active'];
+
+    public function category () {
+        return $this->belongsTo (UserMarketplaceAdCategory::class, 'category_id');
+    }
 }

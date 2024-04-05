@@ -10,10 +10,11 @@ use Conner\Likeable\Likeable;
 use CrixuAMG\Mentions\Models\Traits\HasMentionsTrait;
 use Rinvex\Categories\Traits\Categorizable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Digikraaft\ReviewRating\Traits\HasReviewRating;
 
 class UserMarketplaceAd extends Model implements HasMedia
 {
-    use SoftDeletes, HasFactory, HasMediaTrait, Likeable, HasMentionsTrait, Categorizable;
+    use SoftDeletes, HasFactory, HasMediaTrait, Likeable, HasMentionsTrait, Categorizable, HasReviewRating;
 
 
     /**
@@ -23,7 +24,7 @@ class UserMarketplaceAd extends Model implements HasMedia
      */
     protected $table = 'user_marketplace_ads';
 
-    protected $fillable = ['user_id', 'country_id', 'gender_id', 'gender_pronoun', 'title', 'description', 'active', 'is_verified', 'is_vip', 'is_smoker', 'is_drinker', 'has_tattoo', 'has_piercing'];
+    protected $fillable = ['user_id', 'city_id', 'country_id', 'gender_id', 'gender_pronoun', 'title', 'description', 'active', 'is_verified', 'is_vip', 'is_smoker', 'is_drinker', 'has_tattoo', 'has_piercing'];
     protected $appends = ['photos_list'];
     /*
      * Relationships
@@ -56,6 +57,10 @@ class UserMarketplaceAd extends Model implements HasMedia
 
     public function country () {
         return $this->belongsTo (Country::class, 'country_id');
+    }
+
+    public function city () {
+        return $this->belongsTo (UserMarketplaceAdCity::class, 'city_id');
     }
 
     public function photos () {

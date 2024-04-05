@@ -10,14 +10,14 @@ return [
     // Categories Database Tables
     'tables' => [
 
-        'categories' => 'categories',
+        'categories' => 'user_marketplace_ads_categories',
         'categorizables' => 'categorizables',
 
     ],
 
     // Categories Models
     'models' => [
-        'category' => \Rinvex\Categories\Models\Category::class,
+        'category' => App\Model\UserMarketplaceAdCategory::class,
     ],
 
 ];

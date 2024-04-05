@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Providers\MarketplaceServiceProvider;
 use App\Model\{Country, UserMarketplaceAd, UserMarketplaceAdCity};
 use Illuminate\Http\Request;
 use View;
@@ -75,7 +76,7 @@ class MarketplacePublicController extends Controller {
      */
     public function search(Request $request) {
         $keyword = $request->input ('keyword');
-        
+
         return view('marketplace.index', [
             'ads' => UserMarketplaceAd::where('active', '=', 1)->get (),
             'countries' => Country::all()

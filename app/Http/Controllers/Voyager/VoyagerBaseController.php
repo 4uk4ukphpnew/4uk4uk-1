@@ -15,7 +15,8 @@ use TCG\Voyager\Events\BreadDataRestored;
 use TCG\Voyager\Events\BreadDataUpdated;
 use TCG\Voyager\Events\BreadImagesDeleted;
 use TCG\Voyager\Http\Controllers\Traits\BreadRelationshipParser;
-use TCG\Voyager\Http\Controllers\VoyagerBaseController as BaseVoyagerBaseController;
+//use TCG\Voyager\Http\Controllers\VoyagerBaseController as BaseVoyagerBaseController;
+use MonstreX\VoyagerExtension\Controllers\VoyagerExtensionBaseController as BaseVoyagerBaseController;
 
 class VoyagerBaseController extends BaseVoyagerBaseController
 {
@@ -35,7 +36,7 @@ class VoyagerBaseController extends BaseVoyagerBaseController
 
     public function index(Request $request)
     {
-
+//dd(\App\Model\UserMarketplaceCategory::find (1));
         // GET THE SLUG, ex. 'posts', 'pages', etc.
         $slug = $this->getSlug($request);
 

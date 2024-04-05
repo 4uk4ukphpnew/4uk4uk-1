@@ -12,6 +12,7 @@
 		"awssat/laravel-visits": "6.0.0",
 		"crixuamg/laravel-mentions": "4.0.1",
 		"devfactory/minify": "1.0.14",
+		"digikraaft/laravel-review-rating": "*",
 		"fideloper/proxy": "4.4.2",
 		"geoip2/geoip2": "v2.13.0",
 		"graham-campbell/markdown": "v13.1.2",
@@ -22,6 +23,8 @@
 		"laravelista/comments": "4.5.0",
 		"league/flysystem-aws-s3-v3": "1.0.30",
 		"mews/purifier": "3.4.2",
+		"monstrex/voyager-extension": "*",
+		"overtrue/laravel-favorite": "*",
 		"paypal/rest-api-sdk-php": "1.14.0",
 		"pbmedia/laravel-ffmpeg": "7.5.12",
 		"pion/laravel-chunk-upload": "v1.5.3",
@@ -32,9 +35,10 @@
 		"rtconner/laravel-likeable": "3.2.0",
 		"silviolleite/laravelpwa": "2.0.3",
 		"spatie/laravel-collection-macros": "*",
-		"spatie/laravel-medialibrary": "7.20.0",
+		"spatie/laravel-medialibrary": "*",
 		"spatie/laravel-searchable": "1.12.0",
 		"spatie/laravel-sitemap": "*",
+		"spatie/laravel-sluggable": "*",
 		"spatie/laravel-translatable": "*",
 		"spatie/schema-org": "3.4.0",
 		"stripe/stripe-php": "v7.128.0",
@@ -46,6 +50,7 @@
 	},
     "require-dev": {
 		"barryvdh/laravel-debugbar": "v3.7.0",
+		"beyondcode/laravel-er-diagram-generator": "*",
 		"facade/ignition": "2.17.7",
 		"fakerphp/faker": "v1.20.0",
 		"friendsofphp/php-cs-fixer": "v3.4.0",
@@ -78,7 +83,8 @@
             "app/Model"
         ],
         "files": [
-            "app/Helpers/helpers.php"
+            "app/Helpers/helpers.php",
+			"app/constants.php"
         ]
     },
     "autoload-dev": {

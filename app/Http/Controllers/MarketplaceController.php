@@ -8,6 +8,8 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\GenericHelperServiceProvider;
 use App\Providers\AttachmentServiceProvider;
+use App\Providers\MarketplaceServiceProvider;
+use App\Http\Requests\{UserMarketplaceAdRequest, DeleteUserMarketplaceAdRequest};
 use JavaScript,View;
 
 class MarketplaceController extends Controller {
@@ -38,7 +40,9 @@ class MarketplaceController extends Controller {
         }
 
         return view('marketplace.show', [
-            'ad' => $ad
+            'ad' => $ad,
+            'countries' => Country::all (),
+            'genders' => UserGender::all ()
         ]);
     }
 
@@ -50,6 +54,7 @@ class MarketplaceController extends Controller {
     public function create()
     {
         $canCreateAd = true;
+
         if(getSetting('site.enforce_user_identity_checks')){
             if(!GenericHelperServiceProvider::isUserVerified()){
                 $canCreateAd = false;
@@ -77,9 +82,14 @@ class MarketplaceController extends Controller {
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit(int $id)
-    {
+    public function edit(int $id) {
         $canEditAd = true;
+        $ad = UserMarketplaceAd::find($id);
+
+        if (!$ad) {
+            abort(404);
+        }
+
         if(getSetting('site.enforce_user_identity_checks')){
             if(!GenericHelperServiceProvider::isUserVerified()){
                 $canEditAd = false;
@@ -97,21 +107,77 @@ class MarketplaceController extends Controller {
         ]);
 
         return view('pages.marketplace.edit', [
-            'ad' => UserMarketplaceAd::find($id),
+            'ad' => $ad,
             'countries' => Country::all (),
             'genders' => UserGender::all ()
         ]);
     }
 
-    public function store (Request $request) {
+    public function store (UserMarketplaceAdRequest $request) {
+        $canStoreAd = true;
 
+        if(getSetting('site.enforce_user_identity_checks')){
+            if(!GenericHelperServiceProvider::isUserVerified()){
+                $canStoreAd = false;
+            }
+        }
+        dd($request);
+        $newUserAd = UserMarketplaceAd::create ([
+            'user_id' => Auth::user()->id,
+            'country_id' => $request->input ('country_id'),
+            'city_id' => $request->input ('city_id'),
+            'first_name' => $request->input ('first_name'),
+            'last_name' => $request->input ('last_name'),
+            'title' => $request->input ('title'),
+            'description' => $request->input ('description'),
+            'featured_image' => $request->input ('featured_image'),
+            'active' => $request->input ('active') == 'on' ? 1 : 0,
+            'gender_id' => $request->input ('gender_id'),
+            'gender_pronoun' => $request->input ('gender_pronoun'),
+            'is_smoker' => $request->input ('is_smoker') == 'on' ? 1 : 0,
+            'is_drinker' => $request->input ('is_drinker') == 'on' ? 1 : 0,
+            'has_tattoo' => $request->input ('has_tattoo') == 'on' ? 1 : 0,
+            'has_piercing' => $request->input ('has_piercing') == 'on' ? 1 : 0,
+        ]);
+
+        $request->session()->flash('hasBeenCreated', true);
+        $request->session()->flash('hasBeenCreateddMsg', '');
+
+        return redirect()
+            ->action([MarketplaceController::class, 'edit'], ['id' => $id])
+        ;
     }
 
-    public function update (Request $request, int $id) {
+    public function update (UserMarketplaceAdRequest $request, int $id) {
+        $canUpdateAd = true;
+        $ad = UserMarketplaceAd::find($id);
 
+        if (!$ad) {
+            abort(404);
+        }
+
+        $request->session()->flash('hasBeenUpdated', true);
+        $request->session()->flash('hasBeenUpdatedMsg', '');
+
+        return redirect()
+            ->action([MarketplaceController::class, 'edit'], ['id' => $id])
+        ;
     }
 
-    public function delete (Request $request, int $id) {
+    public function delete (DeleteUserMarketplaceAdRequest $request, int $id) {
+        $canDeleteAd = true;
+        $ad = UserMarketplaceAd::find($id);
 
+        if (!$ad || $ad->trashed()) {
+            abort(404);
+        }
+        $ad->delete ();
+
+        $request->session()->flash('hasBeenDeleted', true);
+        $request->session()->flash('hasBeenDeletedMsg', '');
+
+        return redirect()
+            ->action(MarketplaceController::class, 'index')
+        ;
     }
 }
