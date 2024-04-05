@@ -585,7 +585,7 @@ class DataTypesTableSeeder extends Seeder
                 'display_name_singular' => 'Marketplace Category',
                 'display_name_plural' => 'Marketplace Categories',
                 'icon' => 'voyager-thumb-tack',
-                'model_name' => 'Rinvex\\Categories\\Models\\Category',
+                'model_name' => 'App\\Model\\UserMarketplaceAdCategory',
                 'policy_name' => NULL,
                 'controller' => NULL,
                 'description' => NULL,

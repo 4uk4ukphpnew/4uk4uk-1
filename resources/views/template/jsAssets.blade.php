@@ -32,6 +32,9 @@
 <script src="/libs/lightbox/dist/ekko-lightbox.js" type="text/javascript"></script>
 
 <script>
+    let titleEditor;
+    let descEditor;
+
     $(document).on('click', '[data-toggle="lightbox"]', function(event) {
         event.preventDefault();
         $(this).ekkoLightbox();
@@ -44,11 +47,25 @@
 
         ClassicEditor
             .create (document.querySelector('.ckeditor-input-title'))
+            .then( editor => {
+                titleEditor = editor;
+                
+                editor.model.document.on( 'change:data', () => {
+                    editorData = editor.getData();
+                } );
+            } )
             .catch (error => {
                 console.error (error);
             });
         ClassicEditor
             .create (document.querySelector('.ckeditor-input-description'))
+            .then( editor => {
+                descEditor = editor;
+
+                editor.model.document.on( 'change:data', () => {
+                    editorData = editor.getData();
+                } );
+            } )
             .catch (error => {
                 console.error (error);
             });
@@ -58,6 +75,8 @@
         //const instance = new Collapse(element);
     });
 </script>
+@yield('custom_js')
+
 @if(getSetting('custom-code-ads.custom_js'))
     {!! getSetting('custom-code-ads.custom_js') !!}
 @endif

@@ -1518,7 +1518,7 @@ class PermissionsTableSeeder extends Seeder
             array (
                 'id' => 192,
                 'key' => 'browse_user_marketplace_ads_categories',
-                'table_name' => 'categories',
+                'table_name' => 'user_marketplace_ads_categories',
                 'created_at' => '2023-06-21 16:26:04',
                 'updated_at' => '2023-06-21 16:26:04',
             ),
@@ -1526,7 +1526,7 @@ class PermissionsTableSeeder extends Seeder
             array (
                 'id' => 193,
                 'key' => 'read_user_marketplace_ads_categories',
-                'table_name' => 'categories',
+                'table_name' => 'user_marketplace_ads_categories',
                 'created_at' => '2023-06-21 16:26:04',
                 'updated_at' => '2023-06-21 16:26:04',
             ),
@@ -1534,7 +1534,7 @@ class PermissionsTableSeeder extends Seeder
             array (
                 'id' => 194,
                 'key' => 'edit_user_marketplace_ads_categories',
-                'table_name' => 'categories',
+                'table_name' => 'user_marketplace_ads_categories',
                 'created_at' => '2023-06-21 16:26:04',
                 'updated_at' => '2023-06-21 16:26:04',
             ),
@@ -1542,7 +1542,7 @@ class PermissionsTableSeeder extends Seeder
             array (
                 'id' => 195,
                 'key' => 'add_user_marketplace_ads_categories',
-                'table_name' => 'categories',
+                'table_name' => 'user_marketplace_ads_categories',
                 'created_at' => '2023-06-21 16:26:04',
                 'updated_at' => '2023-06-21 16:26:04',
             ),
@@ -1550,7 +1550,7 @@ class PermissionsTableSeeder extends Seeder
             array (
                 'id' => 196,
                 'key' => 'delete_user_marketplace_ads_categories',
-                'table_name' => 'categories',
+                'table_name' => 'user_marketplace_ads_categories',
                 'created_at' => '2023-06-21 16:26:04',
                 'updated_at' => '2023-06-21 16:26:04',
             ),
@@ -1558,7 +1558,7 @@ class PermissionsTableSeeder extends Seeder
             array (
                 'id' => 197,
                 'key' => 'restore_user_marketplace_ads_categories',
-                'table_name' => 'categories',
+                'table_name' => 'user_marketplace_ads_categories',
                 'created_at' => '2023-06-21 16:26:04',
                 'updated_at' => '2023-06-21 16:26:04',
             ),

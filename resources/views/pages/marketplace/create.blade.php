@@ -21,25 +21,41 @@
          ])->withFullUrl()
     !!}
 @stop
+@section('custom_js')
+    <script>
+        $(document).on('submit', '#create-ad-form', function (e) {
+            const title = titleEditor.getData();
+            const desc  = descEditor.getData();
+
+            //e.preventDefault();
+
+            $('#title').val(title);
+            $('#description').val(desc);
+
+            $(this).submit();
+        });
+    </script>
+@stop
 
 @section('content')
+    @if($errors->any()) {!! dd($errors) !!}@endif
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-lg-9 mb-5 mb-lg-0 min-vh-100 mt-1 mt-md-0 pl-md-0 pr-md-0 content-wrapper">
                 <div class="container" style="margin: 30px;">
-                    <form method="POST" action="{{route('my.ads.store')}}">
+                    <form method="POST" action="{{route('my.ads.store')}}" id="create-ad-form">
                         @csrf
                         @include('elements.dropzone-dummy-element')
                         <div class="row mb-4">
                             <div class="col">
                                 <label class="form-label" for="featured_image">Featured image</label>
-                                <input type="file" class="form-control" id="featured_image" />
+                                <input type="file" class="form-control" name="featured_image" id="featured_image" />
                             </div>
                         </div>
                         <div class="row mb-4">
                             <div class="col">
                                 <label class="form-label" for="photos">Photos</label>
-                                <input type="file" class="form-control" id="photos" multiple />
+                                <input type="file" class="form-control" name="photos[]" id="photos" multiple />
                             </div>
                         </div>
                         <div class="row mb-4">
@@ -59,18 +75,28 @@
                         <div class="row mb-2">
                             <div class="col">
                                 <div class="form-outline ckeditor-input-title mb-4" data-mdb-input-init>
-                                    <textarea name="title" class="form-control" id="title" rows="4"></textarea>
+                                    <textarea name="title" class="form-control" id="title" rows="4" form="create-ad-form"></textarea>
                                     <label class="form-label" for="title">Ad subject</label>
                                 </div>
                             </div>
                             <hr>
                             <div class="col">
                                 <div class="form-outline ckeditor-input-description mb-4" data-mdb-input-init>
-                                    <textarea name="description" class="form-control ckeditor-input" id="description" rows="4"></textarea>
+                                    <textarea name="description" class="form-control ckeditor-input" id="description" rows="4" form="create-ad-form"></textarea>
                                     <label class="form-label" for="description">Ad description</label>
                                 </div>
                             </div>
                             <hr>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="row mb-4">
+                            <div class="col">
+                                <div class="form-check form-switch form-outline">
+                                    <input class="form-check-input" type="checkbox" name="active" role="switch" id="active" checked/>
+                                    <label class="form-check-label" for="active">Active</label>
+                                </div>
+                            </div>
                         </div>
                         <br>
                         <br>

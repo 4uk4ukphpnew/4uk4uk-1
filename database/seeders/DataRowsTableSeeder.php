@@ -5347,41 +5347,87 @@ class DataRowsTableSeeder extends Seeder
                 array (
                     'id' => 372,
                     'data_type_id' => 43,
-                    'field' => 'id',
+                    'field' => 'name',
                     'type' => 'text',
-                    'display_name' => 'Id',
-                    'required' => 0,
-                    'browse' => 0,
-                    'read' => 0,
-                    'edit' => 0,
-                    'add' => 0,
+                    'display_name' => 'Name',
+                    'required' => 1,
+                    'browse' => 1,
+                    'read' => 1,
+                    'edit' => 1,
+                    'add' => 1,
                     'delete' => 0,
-                    'details' => '{}',
+                    'details' => '{"default": ""}',
                     'order' => 1,
                 ),
-
-                // Marketplace Ads Filters
+                // Marketplace Ads Categories
                 333 =>
                 array (
                     'id' => 373,
-                    'data_type_id' => 44,
-                    'field' => 'id',
-                    'type' => 'text',
-                    'display_name' => 'Id',
+                    'data_type_id' => 43,
+                    'field' => 'description',
+                    'type' => 'text_area',
+                    'display_name' => 'Description',
+                    'required' => 0,
+                    'browse' => 1,
+                    'read' => 1,
+                    'edit' => 1,
+                    'add' => 1,
+                    'delete' => 0,
+                    'details' => '{"default": ""}',
+                    'order' => 2,
+                ),
+                334 =>
+                array (
+                    'id' => 374,
+                    'data_type_id' => 43,
+
+                    'field' => 'category',
+                    'type' => 'adv_related',
+                    'display_name' => 'Sub-category',
                     'required' => 0,
                     'browse' => 0,
+                    'read' => 1,
+                    'edit' => 1,
+                    'add' => 0,
+                    'delete' => 1,
+                    'details' => '{
+                        "related_model": {
+                            "source": "marketplace_categories",
+                            "search_field": "name",
+                            "display_field": "name",
+                            "fields": [
+                                "name",
+                                "description",
+                                "slug",
+                                "parent_id"
+                            ]
+                        }
+                    }',
+                    'order' => 3,
+                ),
+
+                // Marketplace Ads Filters
+                335 =>
+                array (
+                    'id' => 375,
+                    'data_type_id' => 44,
+                    'field' => 'active',
+                    'type' => 'inline_checkbox',
+                    'display_name' => 'Active',
+                    'required' => 1,
+                    'browse' => 1,
                     'read' => 0,
                     'edit' => 0,
                     'add' => 0,
                     'delete' => 0,
                     'details' => '{}',
-                    'order' => 1,
+                    'order' => 2,
                 ),
 
                 // Marketplace Ads Settings
-                334 =>
+                336 =>
                 array (
-                    'id' => 374,
+                    'id' => 376,
                     'data_type_id' => 45,
                     'field' => 'id',
                     'type' => 'text',
@@ -5395,6 +5441,7 @@ class DataRowsTableSeeder extends Seeder
                     'details' => '{}',
                     'order' => 1,
                 ),
+
         ));
 
 

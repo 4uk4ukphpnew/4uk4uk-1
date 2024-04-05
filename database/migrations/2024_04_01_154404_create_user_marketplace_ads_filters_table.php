@@ -15,7 +15,16 @@ class CreateUserMarketplaceAdsFiltersTable extends Migration
     {
         Schema::create('user_marketplace_ads_filters', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->json('name');
+            $table->unsignedInteger('category_id')->unique();
+            $table->tinyInteger('active')->default(0);
             $table->timestamps();
+
+            $table->foreign('category_id')
+                ->references('id')
+                ->on('user_marketplace_ads_categories')
+                ->onDelete('cascade')
+            ;
         });
     }
 
