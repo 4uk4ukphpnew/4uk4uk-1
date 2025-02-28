@@ -1,4 +1,4 @@
-## JustFans - Paid creator social media platform
+## 4uk4uk - Paid creator social media platform
 
 #### About
 
